@@ -5,6 +5,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import mcmodtutorial.blocks.ModBlocks;
 import mcmodtutorial.core.proxy.CommonProxy;
 import mcmodtutorial.lib.References;
 
@@ -41,7 +42,7 @@ public class McModTutorial
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event)
     {
-
+        ModBlocks.init();
     }
 
     /**
