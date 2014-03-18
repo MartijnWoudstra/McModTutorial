@@ -11,4 +11,5 @@ package mcmodtutorial.lib;
 public class Strings
 {
     public static final String TestBlockName = "testBlock";
+    public static final String TestItemName = "testItem";
 }
