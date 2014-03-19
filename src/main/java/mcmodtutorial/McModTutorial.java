@@ -10,6 +10,8 @@ import mcmodtutorial.core.handler.CraftingHandler;
 import mcmodtutorial.core.proxy.CommonProxy;
 import mcmodtutorial.items.ModItems;
 import mcmodtutorial.lib.References;
+import net.minecraft.creativetab.CreativeTabs;
+import mcmodtutorial.creativetab.McModTutorialTab;
 
 /**
  * mcmodtutorial
@@ -31,6 +33,13 @@ public class McModTutorial
      */
     @SidedProxy(clientSide = References.CLIENTPROXYLOCATION, serverSide = References.COMMONPROXYLOCATION)
     public static CommonProxy proxy;
+
+    private static CreativeTabs mcModTutorialTab = new McModTutorialTab(CreativeTabs.getNextID(), References.MODID);
+
+    public static CreativeTabs getCreativeTab()
+    {
+        return mcModTutorialTab;
+    }
 
     /**
      * preInit

@@ -1,2 +1,3 @@
 tile.mcmodtutorial:testBlock.name=Test Block
 item.mcmodtutorial:testitem.name=Test Item
+itemGroup.mcmodtutorial=Test Tab
