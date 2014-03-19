@@ -1,8 +1,8 @@
 package mcmodtutorial.blocks;
 
+import mcmodtutorial.McModTutorial;
 import mcmodtutorial.lib.Strings;
 import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
 
 /**
  * mcmodtutorial
@@ -19,7 +19,7 @@ public class TestBlock extends BlockMcModTutorial
         this.setBlockName(Strings.TestBlockName);
         this.setHardness(1f);
         this.setResistance(3f);
-        this.setCreativeTab(CreativeTabs.tabBlock);
+        this.setCreativeTab(McModTutorial.getCreativeTab());
         this.setStepSound(Block.soundTypeAnvil);
         ModBlocks.register(this);
     }

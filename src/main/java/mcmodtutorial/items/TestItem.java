@@ -1,7 +1,7 @@
 package mcmodtutorial.items;
 
+import mcmodtutorial.McModTutorial;
 import mcmodtutorial.lib.Strings;
-import net.minecraft.creativetab.CreativeTabs;
 
 /**
  * mcmodtutorial
@@ -16,7 +16,7 @@ public class TestItem extends ItemMcModTutorial
     public TestItem()
     {
         this.setUnlocalizedName(Strings.TestItemName);
-        this.setCreativeTab(CreativeTabs.tabCombat);
+        this.setCreativeTab(McModTutorial.getCreativeTab());
         ModItems.register(this);
     }
 }
