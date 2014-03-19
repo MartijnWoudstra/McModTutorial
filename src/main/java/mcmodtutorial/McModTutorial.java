@@ -6,6 +6,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import mcmodtutorial.blocks.ModBlocks;
+import mcmodtutorial.core.handler.CraftingHandler;
 import mcmodtutorial.core.proxy.CommonProxy;
 import mcmodtutorial.items.ModItems;
 import mcmodtutorial.lib.References;
@@ -46,6 +47,8 @@ public class McModTutorial
         ModBlocks.init();
 
         ModItems.init();
+
+        CraftingHandler.init();
     }
 
     /**
