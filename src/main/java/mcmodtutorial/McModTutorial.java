@@ -5,13 +5,15 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.registry.GameRegistry;
 import mcmodtutorial.blocks.ModBlocks;
 import mcmodtutorial.core.handler.CraftingHandler;
 import mcmodtutorial.core.proxy.CommonProxy;
+import mcmodtutorial.creativetab.McModTutorialTab;
 import mcmodtutorial.items.ModItems;
 import mcmodtutorial.lib.References;
+import mcmodtutorial.world.TutorialWorldGenerator;
 import net.minecraft.creativetab.CreativeTabs;
-import mcmodtutorial.creativetab.McModTutorialTab;
 
 /**
  * mcmodtutorial
@@ -58,6 +60,9 @@ public class McModTutorial
         ModItems.init();
 
         CraftingHandler.init();
+
+        //Adds our worldgenerator. The int is the weight. How higher the number, how later your generator will be called
+        GameRegistry.registerWorldGenerator(new TutorialWorldGenerator(), 1);
     }
 
     /**
