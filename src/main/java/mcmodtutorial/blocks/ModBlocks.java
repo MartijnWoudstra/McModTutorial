@@ -14,10 +14,12 @@ import net.minecraft.block.Block;
 public class ModBlocks
 {
     public static Block testBlock;
+    public static Block testTileBlock;
 
     public static void init()
     {
         testBlock = new TestBlock();
+        testTileBlock = new TestTileBlock();
     }
 
     /**
