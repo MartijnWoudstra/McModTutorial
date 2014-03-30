@@ -5,9 +5,11 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import mcmodtutorial.blocks.ModBlocks;
 import mcmodtutorial.core.handler.CraftingHandler;
+import mcmodtutorial.core.handler.GUIHandler;
 import mcmodtutorial.core.proxy.CommonProxy;
 import mcmodtutorial.creativetab.McModTutorialTab;
 import mcmodtutorial.items.ModItems;
@@ -27,6 +29,12 @@ import net.minecraft.creativetab.CreativeTabs;
 
 public class McModTutorial
 {
+    /**
+     * An instance of our @Mod
+     */
+    @Mod.Instance
+    public static McModTutorial instance;
+
     /**
      * @SidedProxy
      *
@@ -78,7 +86,8 @@ public class McModTutorial
     @Mod.EventHandler
     public static void init(FMLInitializationEvent event)
     {
-
+        //Register our GUI Handler.
+        NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GUIHandler());
     }
 
     /**
