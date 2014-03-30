@@ -10,9 +10,16 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TestTileEntity extends TileEntity
 {
+    /**
+     * A basic Tile Entity.
+     * For demonstration purpose, ill change the worldtime every 5 seconds.
+     */
     int tick;
     int worldTime = 1;
 
+    /**
+     * This method gets called every tick (tick = 1/20 sec)
+     */
     @Override
     public void updateEntity()
     {

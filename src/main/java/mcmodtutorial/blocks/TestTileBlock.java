@@ -22,12 +22,23 @@ public class TestTileBlock extends BlockMcModTutorial
         ModBlocks.register(this);
     }
 
+    /**
+     * Tells forge that we have a tile entity.
+     *
+     * @param meta
+     * @return true
+     */
     @Override
     public boolean hasTileEntity(int meta)
     {
         return true;
     }
 
+    /**
+     * Create a tile entity. This should return your TE class
+     *
+     * @return your TE class
+     */
     @Override
     public TileEntity createTileEntity(World world, int meta)
     {

@@ -64,6 +64,7 @@ public class McModTutorial
         //Adds our worldgenerator. The int is the weight. How higher the number, how later your generator will be called
         GameRegistry.registerWorldGenerator(new TutorialWorldGenerator(), 1);
 
+        //Register all TE's here.
         proxy.registerTileEntities();
     }
 
