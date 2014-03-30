@@ -23,20 +23,24 @@ public class TestTileEntity extends TileEntity
     @Override
     public void updateEntity()
     {
-        tick++;
-        if(tick == 100)
+        if(!worldObj.isRemote)
         {
-            if(worldTime == 1)
+            tick++;
+            if(tick == 100)
             {
-                this.worldObj.setWorldTime(1000);
-                worldTime = 0;
+                if(worldTime == 1)
+                {
+                    this.worldObj.setWorldTime(1000);
+                    worldTime = 0;
+                }
+                else
+                {
+                    this.worldObj.setWorldTime(0);
+                    worldTime = 1;
+                }
+                tick = 0;
+                System.out.print("test");
             }
-            else
-            {
-                this.worldObj.setWorldTime(0);
-                worldTime = 1;
-            }
-            tick = 0;
         }
     }
 }
