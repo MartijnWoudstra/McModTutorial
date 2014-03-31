@@ -1,7 +1,10 @@
 package mcmodtutorial.core.handler;
 
 import cpw.mods.fml.common.network.IGuiHandler;
+import mcmodtutorial.client.gui.GUIInventory;
 import mcmodtutorial.client.gui.TestGUI;
+import mcmodtutorial.inventory.InventoryTest;
+import mcmodtutorial.tileentities.TileEntityTestContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
@@ -22,6 +25,12 @@ public class GUIHandler implements IGuiHandler
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
     {
+        if(ID == 1)
+        {
+            // Create an Object of our TE, so we can give that to our inventory.
+            TileEntityTestContainer tileEntityTestContainer = (TileEntityTestContainer) world.getTileEntity(x, y, z);
+            return new InventoryTest(player.inventory, tileEntityTestContainer);
+        }
         return null;
     }
 
@@ -34,6 +43,12 @@ public class GUIHandler implements IGuiHandler
     {
         if(ID == 0)
             return new TestGUI();
+        if(ID == 1)
+        {
+            // Create an Object of our TE, so we can give that to our GUI.
+            TileEntityTestContainer tileEntityTestContainer = (TileEntityTestContainer) world.getTileEntity(x, y, z);
+            return new GUIInventory(player.inventory, tileEntityTestContainer);
+        }
         return null;
     }
 }
