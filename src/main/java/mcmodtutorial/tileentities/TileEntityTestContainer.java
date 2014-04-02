@@ -3,6 +3,7 @@ package mcmodtutorial.tileentities;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
 /**
@@ -156,5 +157,33 @@ public class TileEntityTestContainer extends TileEntity implements IInventory
     {
         //TODO
         return true;
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound var1)
+    {
+        NBTTagCompound[] tag = new NBTTagCompound[INVENTORY_SIZE];
+        for (int x = 0; x < INVENTORY_SIZE; x++)
+        {
+            tag[x] = new NBTTagCompound();
+            if (inventory[x] != null)
+            {
+                tag[x] = inventory[x].writeToNBT(tag[x]);
+            }
+            var1.setTag("inventory" + x, tag[x]);
+        }
+        super.writeToNBT(var1);
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound var1)
+    {
+        NBTTagCompound[] tag = new NBTTagCompound[INVENTORY_SIZE];
+        for (int x = 0; x < INVENTORY_SIZE; x++)
+        {
+            tag[x] = var1.getCompoundTag("inventory" + x);
+            inventory[x] = ItemStack.loadItemStackFromNBT(tag[x]);
+        }
+        super.readFromNBT(var1);
     }
 }
