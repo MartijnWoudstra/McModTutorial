@@ -5,6 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 
 /**
  * InventoryTest
@@ -21,6 +22,12 @@ public class InventoryTest extends Container
     {
         tile = tileEntityTestContainer;
         bindPlayerInventory(inventory);
+    }
+
+    @Override
+    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int slotIndex)
+    {
+        return null;
     }
 
     /*
