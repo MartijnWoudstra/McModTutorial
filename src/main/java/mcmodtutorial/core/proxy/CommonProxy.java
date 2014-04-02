@@ -2,6 +2,7 @@ package mcmodtutorial.core.proxy;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import mcmodtutorial.tileentities.TestTileEntity;
+import mcmodtutorial.tileentities.TileEntityTestContainer;
 
 /**
  * mcmodtutorial
@@ -22,5 +23,11 @@ public class CommonProxy
     public void registerTileEntities()
     {
         GameRegistry.registerTileEntity(TestTileEntity.class, "TestBlockTileEntity");
+        GameRegistry.registerTileEntity(TileEntityTestContainer.class, "TileEntityTestContainer");
     }
+
+    /**
+     * Making a method for our ClientProxy. Rendering = Client!
+     */
+    public void registerRendering(){}
 }

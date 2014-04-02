@@ -74,6 +74,9 @@ public class McModTutorial
 
         //Register all TE's here.
         proxy.registerTileEntities();
+
+        //add rendering registry.
+        proxy.registerRendering();
     }
 
     /**

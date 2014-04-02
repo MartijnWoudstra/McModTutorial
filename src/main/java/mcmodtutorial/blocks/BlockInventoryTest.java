@@ -8,6 +8,7 @@ import mcmodtutorial.lib.References;
 import mcmodtutorial.tileentities.TileEntityTestContainer;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -33,6 +34,8 @@ public class BlockInventoryTest extends BlockContainer
          */
         this.setBlockName(References.MODID + ":" + "BlockInventoryTest");
         GameRegistry.registerBlock(this, this.getUnlocalizedName());
+        //Set the collision box of a block. Params xMin, yMin, zMin, xMax, yMax, zMax.
+        setBlockBounds(0.05f, 0.5f, 0.05f, 0.95f, 1f ,0.95f);
     }
 
     @Override
@@ -49,7 +52,7 @@ public class BlockInventoryTest extends BlockContainer
 
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int par1, float par2, float par3, float par4)
     {
-        entityPlayer.openGui(McModTutorial.instance, 1, world, x ,y, z);
+        entityPlayer.openGui(McModTutorial.instance, 1, world, x, y, z);
         return true;
     }
 
@@ -58,5 +61,43 @@ public class BlockInventoryTest extends BlockContainer
     public void registerBlockIcons(IIconRegister iconRegister)
     {
         this.blockIcon = iconRegister.registerIcon(this.getUnlocalizedName());
+    }
+
+    /**
+     * Because we render our block ourselves, we need to set this to -1.
+     */
+    @Override
+    public int getRenderType()
+    {
+        return -1;
+    }
+
+    /**
+     * Do not render as a normal block
+     */
+    @Override
+    public boolean renderAsNormalBlock()
+    {
+        return false;
+    }
+
+    /**
+     *  If a block is solid, and 1x1x1, MC doesnt render the sides of the block next to this block.
+     *  Ingame, this looks like the old see-through piston or sand effect.
+     *  To prevent this, set this to false.
+     */
+    @Override
+    public boolean isOpaqueCube()
+    {
+        return false;
+    }
+
+    /**
+     * Return true to have no particles spawn when you break something.
+     */
+    @SideOnly(Side.CLIENT)
+    public boolean addDestroyEffects(World world, int x, int y, int z, int meta, EffectRenderer effectRenderer)
+    {
+        return true;
     }
 }
