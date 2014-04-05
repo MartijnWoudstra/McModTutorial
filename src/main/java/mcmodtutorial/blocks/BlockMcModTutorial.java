@@ -55,7 +55,7 @@ public class BlockMcModTutorial extends Block
     @Override
     public String getUnlocalizedName()
     {
-        return String.format("tile.%s%s", References.RESOURCESPREFIX, getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
+        return String.format("%s%s", References.RESOURCESPREFIX, getUnwrappedUnlocalizedName(super.getUnlocalizedName()));
     }
 
     /**
