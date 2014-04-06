@@ -6,7 +6,13 @@ import mcmodtutorial.McModTutorial;
 import mcmodtutorial.lib.Strings;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.World;
+
+import java.util.List;
 
 /**
  * mcmodtutorial
@@ -49,10 +55,20 @@ public class TestBlock extends BlockMcModTutorial
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int side, int meta)
     {
-        if(side <= 5)
-            return icons[side];
+        if(meta == 0)
+        {
+            if(side <= 5)
+                return icons[side];
+            else
+                return icons[0];
+        }
         else
-            return icons[0];
+        {
+            if(side<= 5)
+                return icons[5-side];
+            else
+                return icons[0];
+        }
     }
 
     /**
@@ -81,6 +97,33 @@ public class TestBlock extends BlockMcModTutorial
                 default: name = "0";
             }
             icons[i] = iconRegister.registerIcon(getUnwrappedUnlocalizedName(super.getUnlocalizedName()) + name);
+        }
+    }
+
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void getSubBlocks(Item item, CreativeTabs tab, List par3list)
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            par3list.add(new ItemStack(item, 1, i));
+        }
+    }
+
+    @Override
+    public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
+    {
+        if (!world.isRemote)
+        {
+            if (world.isBlockIndirectlyGettingPowered(x, y, z) && world.getBlockMetadata(x, y, z) == 0)
+            {
+                world.setBlock(x, y, z, ModBlocks.testBlock, 1, 2);
+            }
+            if(!world.isBlockIndirectlyGettingPowered(x, y, z) && world.getBlockMetadata(x, y, z) == 1)
+            {
+                world.setBlock(x, y, z, ModBlocks.testBlock, 0, 2);
+            }
         }
     }
 }
