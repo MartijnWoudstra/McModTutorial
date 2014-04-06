@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
 /**
@@ -160,30 +161,40 @@ public class TileEntityTestContainer extends TileEntity implements IInventory
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound var1)
+    public void readFromNBT(NBTTagCompound nbtTagCompound)
     {
-        NBTTagCompound[] tag = new NBTTagCompound[INVENTORY_SIZE];
-        for (int x = 0; x < INVENTORY_SIZE; x++)
+        super.readFromNBT(nbtTagCompound);
+        NBTTagList nbttaglist = nbtTagCompound.getTagList("Items", 10); // 10 = NBTTagCompound
+        this.inventory = new ItemStack[this.getSizeInventory()];
+
+        for (int i = 0; i < nbttaglist.tagCount(); ++i)
         {
-            tag[x] = new NBTTagCompound();
-            if (inventory[x] != null)
+            NBTTagCompound nbttagcompound = nbttaglist.getCompoundTagAt(i);
+            int j = nbttagcompound.getByte("Slot");
+
+            if (j >= 0 && j < this.inventory.length)
             {
-                tag[x] = inventory[x].writeToNBT(tag[x]);
+                this.inventory[j] = ItemStack.loadItemStackFromNBT(nbttagcompound);
             }
-            var1.setTag("inventory" + x, tag[x]);
         }
-        super.writeToNBT(var1);
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound var1)
+    public void writeToNBT(NBTTagCompound nbtTagCompound)
     {
-        NBTTagCompound[] tag = new NBTTagCompound[INVENTORY_SIZE];
-        for (int x = 0; x < INVENTORY_SIZE; x++)
+        super.writeToNBT(nbtTagCompound);
+        NBTTagList nbttaglist = new NBTTagList();
+
+        for (int i = 0; i < this.inventory.length; ++i)
         {
-            tag[x] = var1.getCompoundTag("inventory" + x);
-            inventory[x] = ItemStack.loadItemStackFromNBT(tag[x]);
+            if (this.inventory[i] != null)
+            {
+                NBTTagCompound nbttagcompound = new NBTTagCompound();
+                nbttagcompound.setByte("Slot", (byte)i);
+                this.inventory[i].writeToNBT(nbttagcompound);
+                nbttaglist.appendTag(nbttagcompound);
+            }
         }
-        super.readFromNBT(var1);
+        nbtTagCompound.setTag("Items", nbttaglist);
     }
 }
