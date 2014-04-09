@@ -14,10 +14,12 @@ import net.minecraft.item.Item;
 public class ModItems
 {
     public static Item testItem;
+    public static Item testFood;
 
     public static void init()
     {
         testItem = new TestItem();
+        testFood = new TestFood();
     }
 
     /**
