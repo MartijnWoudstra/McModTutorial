@@ -16,12 +16,14 @@ public class ModBlocks
     public static Block testBlock;
     public static Block testTileBlock;
     public static Block testInventory;
+    public static Block customCrafting;
 
     public static void init()
     {
         testBlock = new TestBlock();
         testTileBlock = new TestTileBlock();
         testInventory = new BlockInventoryTest();
+        customCrafting = new BlockCustomCrafting();
     }
 
     /**
